@@ -1,17 +1,29 @@
 <div id='container'>
 
 <form novalidate name="shortenForm" ng-submit='addLink()'>
-  <input type="url" name="url" placeholder="Enter a URL" ng-model='link.url'
-  ng-pattern="/^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[0-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i"/>
 
-  <div class="error" ng-show="shortenForm.url.$dirty && shortenForm.url.$invalid">
+  <md-input-container flex>
+    
+    <label>Url</label>
+    
+    <input type="url" name="url" placeholder="Enter a URL" ng-model='link.url'
+    ng-pattern="/^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[0-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i"/>
+    
+    <div ng-messages="shortenForm.url.$error" ng-show="shortenForm.url.$dirty && shortenForm.url.$invalid">
+      <div ng-message="pattern">Enter a valid URL!</div>
+    </div>
+
+  </md-input-container>
+
+
+<!--   <div class="error" ng-show="shortenForm.url.$dirty && shortenForm.url.$invalid">
 
     <small class="error" ng-show="shortenForm.url.$error">
     Enter a valid URL!
     </small>
-  </div>
+  </div> -->
 
-  <button type="submit" ng-disabled="shortenForm.$invalid"> Shorten! </button>
+  <md-button class="md-raised md-primary" type="submit" ng-disabled="shortenForm.$invalid"> Shorten! </md-button>
 </form>
 
 </div>

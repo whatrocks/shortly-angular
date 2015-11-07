@@ -3,7 +3,8 @@ angular.module('shortly', [
   'shortly.links',
   'shortly.shorten',
   'shortly.auth',
-  'ui.router'
+  'ui.router',
+  'ngMaterial'
 ])
 .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
   $stateProvider
