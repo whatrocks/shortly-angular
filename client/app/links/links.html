@@ -12,7 +12,7 @@
   <input type="text" ng-model='filter'>
 
   <ul>
-    <li ng-repeat="link in data.links | orderBy: '-visits' " >
+    <li ng-repeat="link in data.links | filter: filter | orderBy: '-visits' " >
       <div class='info'>
         <div class='visits'><span class='count'>{{link.visits}}</span>Visits</div>
         <div class='title'>{{link.title}}</div>
