@@ -3,40 +3,42 @@ angular.module('shortly', [
   'shortly.links',
   'shortly.shorten',
   'shortly.auth',
-  'ngRoute'
+  'ui.router'
 ])
-.config(function ($routeProvider, $httpProvider) {
-  $routeProvider
-    .when('/signin', {
+.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+  $stateProvider
+    .state('signin', {
+      url: '/signin',
       templateUrl: 'app/auth/signin.html',
       controller: 'AuthController',
       authenticate: false
     })
-    .when('/signup', {
+    .state('signup', {
+      url: '/signup',
       templateUrl: 'app/auth/signup.html',
       controller: 'AuthController',
       authenticate: false
     })
-    .when('/links', {
+    .state('links', {
+      url: '/links',
       templateUrl: 'app/links/links.html',
       controller: 'LinksController',
       authenticate: true
     })
-    .when('/shorten', {
+    .state('shorten', {
+      url: '/shorten',
       templateUrl: 'app/shorten/shorten.html',
       controller: 'ShortenController',
       authenticate: true
     })
-    .when('/logout', {
+    .state('logout', {
+      url: '/logout',
       templateUrl: 'app/links/links.html',
       controller: 'AuthController',
       authenticate: false
-    })
-    .otherwise({
-      redirectTo: '/links'
     });
-    // Your code here
 
+    $urlRouterProvider.otherwise('/links');
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');
@@ -66,14 +68,12 @@ angular.module('shortly', [
   // when it does change routes, we then look for the token in localstorage
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
-  $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    // console.log(next.authenticate);
+  $rootScope.$on('$stateChangeStart', function (evt, next, current) {
     // debugger;
-    // console.log(next.$$route.authenticate );
+    // console.log(next);
     // console.log(!Auth.isAuth());
     // console.log(next.authenticate);
-    if (next.$$route && next.authenticate && !Auth.isAuth()) {
-    // if (next.$$route && !Auth.isAuth()) {
+    if (next && next.authenticate && !Auth.isAuth()) {
       $location.path('/signin');
     }
   });
