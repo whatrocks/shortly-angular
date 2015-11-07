@@ -27,15 +27,13 @@ angular.module('shortly', [
       controller: 'ShortenController',
       authenticate: true
     })
-    .when('/', {
-      templateUrl: 'app/links/links.html',
-      controller: 'LinksController',
-      authenticate: true
-    })
     .when('/logout', {
       templateUrl: 'app/links/links.html',
       controller: 'AuthController',
       authenticate: false
+    })
+    .otherwise({
+      redirectTo: '/links'
     });
     // Your code here
 
