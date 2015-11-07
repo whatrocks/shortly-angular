@@ -19,13 +19,18 @@ angular.module('shortly', [
       controller: 'AuthController',
       authenticate: false
     })
-    .state('links', {
+    .state('nav', {
+      url: '/nav',
+      templateUrl: 'app/nav/nav.html',
+      authenticate: true
+    })
+    .state('nav.links', {
       url: '/links',
       templateUrl: 'app/links/links.html',
       controller: 'LinksController',
       authenticate: true
     })
-    .state('shorten', {
+    .state('nav.shorten', {
       url: '/shorten',
       templateUrl: 'app/shorten/shorten.html',
       controller: 'ShortenController',
@@ -38,7 +43,7 @@ angular.module('shortly', [
       authenticate: false
     });
 
-    $urlRouterProvider.otherwise('/links');
+    $urlRouterProvider.otherwise('/nav/links');
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');
@@ -70,7 +75,7 @@ angular.module('shortly', [
   // if it's not valid, we then redirect back to signin/signup
   $rootScope.$on('$stateChangeStart', function (evt, next, current) {
     // debugger;
-    // console.log(next);
+    console.log(next);
     // console.log(!Auth.isAuth());
     // console.log(next.authenticate);
     if (next && next.authenticate && !Auth.isAuth()) {
