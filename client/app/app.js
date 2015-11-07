@@ -26,6 +26,16 @@ angular.module('shortly', [
       templateUrl: 'app/shorten/shorten.html',
       controller: 'ShortenController',
       authenticate: true
+    })
+    .when('/', {
+      templateUrl: 'app/links/links.html',
+      controller: 'LinksController',
+      authenticate: true
+    })
+    .when('/logout', {
+      templateUrl: 'app/links/links.html',
+      controller: 'AuthController',
+      authenticate: false
     });
     // Your code here
 
@@ -58,15 +68,12 @@ angular.module('shortly', [
   // when it does change routes, we then look for the token in localstorage
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
-
-  
-
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
     // console.log(next.authenticate);
     // debugger;
     // console.log(next.$$route.authenticate );
     // console.log(!Auth.isAuth());
-    console.log(next.authenticate);
+    // console.log(next.authenticate);
     if (next.$$route && next.authenticate && !Auth.isAuth()) {
     // if (next.$$route && !Auth.isAuth()) {
       $location.path('/signin');

@@ -1,9 +1,21 @@
 <div id='container'>
 <!-- Your code here -->
-  <form name="shortenForm" ng-submit='addLink()'>
-    <input type="text" placeholder="Enter a URL" ng-model='link.url' />
-    <button> Shorten! </button>
-  </form>
+
+<div class='navigation'>
+<ul>
+  <li><a href='#/links' class='index'>All Links</a></li>
+  <li><a href='#/shorten' class='create'>Shorten</a></li>
+  <li><a href='#/logout' class='logout'>Logout</a></li>
+
+</ul>
+</div>
+
+
+
+<form name="shortenForm" ng-submit='addLink()'>
+  <input type="text" placeholder="Enter a URL" ng-model='link.url' />
+  <button> Shorten! </button>
+</form>
 
 </div>
 
