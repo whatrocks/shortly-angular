@@ -1,9 +1,27 @@
 <div id='signin'>
   <h1>signin</h1>
   <form name="signinForm" ng-submit='signin()'>
-    <input type='text'ng-model='user.username'>
-    <input type="password" ng-model='user.password'>
-    <button>signin</button>
+    <input type='text' name="username" ng-model='user.username' ng-minlength=5 ng-maxlength=20>
+    <div class="error" ng-show="signinForm.username.$dirty && signinForm.username.$invalid">
+
+      <small class="error" ng-show="signinForm.username.$error.minlength">
+      username must be min 5 char
+      </small>
+      <small class="error" ng-show="signinForm.username.$error.maxlength">
+      username must be max 20 char
+      </small>
+    </div>
+    <input type="password" name="password" ng-model='user.password' ng-minlength=5 ng-maxlength=20>
+    <div class="error" ng-show="signinForm.password.$dirty && signinForm.password.$invalid">
+
+      <small class="error" ng-show="signinForm.password.$error.minlength">
+      password must be min 5 char
+      </small>
+      <small class="error" ng-show="signinForm.password.$error.maxlength">
+      password must be max 20 char
+      </small>
+    </div>
+    <button type="submit" ng-disabled="signinForm.$invalid">signup</button>
   </form>
   <a href="#/signup">Don't have an account? <strong>Signup</strong> ...</a>
 </div>
